@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Cadastro</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/api.js"></script>
+
+
+</head>
+
+<body onload="Listar();">
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">Cadastro de usuário</h1>
+      <p class="lead">Preencha os seus dados</p>
+    </div>
+  </div>
+
+<!-- --------------------------------- INPUT CADASTRO ---------------------------------- ---->
+
+
+  <form class="mb-5" method="POST" action="">
+    <div class="form-group ml-5 mb-n4 col-5">
+      <label for="txtNome">Nome</label>
+      <input id="txtNome" type="text" class="form-control" aria-describedby="nome" placeholder="digite aqui" required
+        name=txtNome/>
+    </div>
+
+    <div class="form-row ml-5 mt-5 mr-n1">
+      <div class="form-group col-md-2 ml-2">
+        <label for="txtIdade">Data de nascimento</label>
+        <input id="txtIdade" type="date" class="form-control" aria-describedby="idade"required
+          name=txtIdade/>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="txtTelefone">Telefone</label>
+        <input id="txtTelefone" type="text" class="form-control" placeholder="(00)00000-0000" required
+          name=txtTelefone/>
+      </div>
+    </div>
+
+    <div class="form-group ml-5 col-5">
+      <label for="txtCpf">CPF</label>
+      <input id="txtCpf" type="text" class="form-control" aria-describedby="data" name="txtCpf" placeholder="digite aqui" required
+          name=txtCpf/>
+    </div>
+    <div class="form-group ml-5 col-5 mb-5">
+      <label for="txtEmail">E-mail</label>
+      <input id="txtEmail" type="email" class="form-control" aria-describedby="e-mail" name="txtEmail" placeholder="digite aqui" required
+          name=txtEmail/>
+    </div>
+    
+
+<!-- --------------------------------- ENDEREÇO --------------------------------------- ---->
+
+    <hr>
+
+    <div class="form-group ml-5 col-3">
+      <label for="txtCep">CEP</label>
+      <input id="txtCep" type="text" class="form-control" aria-describedby="cep" placeholder="digite aqui"
+        onblur="pesquisacep(this.value);" required name=txtCep/>
+    </div>
+
+    <fieldset disabled> <!-- Fieldset serve para desativar os campos e impedir que seja inserido pelo usuário-->
+
+      <div class="form-group ml-5 col-5">
+        <label for="txtRua">Rua</label>
+        <input type="text" class="form-control" id="txtRua" aria-describedby="cep" name="txtRua">
+      </div>
+
+      <div class="form-row ml-5 col-3 mb-3">
+        <label for="txtBairro">Bairro</label>
+        <input type="text" class="form-control" id="txtBairro" aria-describedby="Bairro" name="txtBairro">
+      </div>
+
+      <div class="form-row ml-5">
+        <div class="form-group col-md-4 ml-2">
+          <label for="txtCidade">Cidade</label>
+          <input type="text" class="form-control" id="txtCidade">
+        </div>
+        <div class="form-group col-md-1 ml-2">
+          <label for="txtUf">UF</label>
+          <input type="text" class="form-control" id="txtUf">
+        </div>
+      </div>
+
+    </fieldset>
+
+    <div class="form-group ml-5 col-5">
+      <input type="submit" value="cadastrar" class="btn btn-primary" onclick="CriarUsuario()" />
+    </div>
+  </form>
+
+
+  <!-- --------------------------------- TABELA --------------------------------------- ---->
+
+
+  <div class="table-responsive-md mt-5 ml-5 col-11">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">CPF</th>
+          <th scope="col">Dta Nascimento</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">E-mail</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Rua</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">UF</th>
+          <th scope="col">Excluir</th>
+        </tr>
+      <tbody id="resultado"></tbody>
+    </table>
+  </div>
+
+  <!-- ----------------------------------- FOOTER --------------------------------------- -->
+
+  <footer class="footer bg-light p-5 mt-5">
+
+    <div class="row">
+      <div class="col-lg-6 h-50 text-center text-lg-left my-auto">
+        <ul class="list-inline mb-2">
+          <li class="list-inline-item">
+            <a href="#">Sobre</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="#">Contato</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="#">Termos de uso</a>
+          </li>
+          <li class="list-inline-item">&sdot;</li>
+          <li class="list-inline-item">
+            <a href="#">Politica de uso</a>
+          </li>
+        </ul>
+        <p class="text-muted small mb-4 mb-lg-0">&copy; Connection 2019. Todos direitos reservados.</p>
+      </div>
+    </div>
+
+  </footer>
+
+</body>
+</html>
