@@ -1,3 +1,3 @@
 # Cadastro Simples JS
  
-Criando um site simples de catalogo de filmes utilizando no momento apenas o JSON como forma de estudo
+Criei um cadastro de usuário sem a utilização de banco de dados de armazanamento
